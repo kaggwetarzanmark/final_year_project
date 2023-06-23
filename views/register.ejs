@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="img/logo/logo.png" rel="icon">
+  <title>SalesWave - Register</title>
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="css/ruang-admin.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-login">
+  <!-- Register Content -->
+  <div class="container-login">
+    <div class="row justify-content-center">
+      <div class="col-xl-6 col-lg-12 col-md-9">
+        <div class="card shadow-sm my-5">
+          <div class="card-body p-0">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="login-form">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Register</h1>
+                  </div>
+                  <div class="alert alert-success form-group" role="alert" id="alertMessage" style="<%= flash.success || flash.error ? 'display: block;' : 'display: none;' %>">
+                    <% if (flash.success) { %>
+                      <%= flash.success %>
+                    <% } else if (flash.error) { %>
+                      <%= flash.error %>
+                    <% } %>
+                  </div>
+                  
+                  <form method="POST" action="/register">
+                    <div class="form-group">
+                      <select class="form-control mb-3" name="user_type">
+                        <option>Sales Manager</option>
+                        <option>Cashier</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Username</label>
+                      <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address" name="email" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Password</label>
+                      <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </div>
+                  </form>
+                  
+                  <hr>
+                  <div class="text-center">
+                    <a class="font-weight-bold small" href="/login">Already have an account? </a>
+                  </div>
+                  <div class="text-center">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Register Content -->
+  <script>
+    function showAlert() {
+      document.getElementById("alertMessage").style.display = "block";
+    }
+  </script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/ruang-admin.min.js"></script>
+</body>
+
+</html>
