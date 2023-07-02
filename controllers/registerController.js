@@ -16,7 +16,7 @@ async function registerUser(req, res) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const querySelect =
-      "SELECT COUNT(*) AS count FROM user WHERE email = ? AND user_type = ?";
+      "SELECT COUNT(*) AS count FROM users WHERE email = ? AND user_type = ?";
     const valuesSelect = [email, user_type];
 
     connection.query(querySelect, valuesSelect, (selectError, selectResults) => {
@@ -34,7 +34,7 @@ async function registerUser(req, res) {
           res.redirect("/register");
         } else {
           const queryInsert =
-            "INSERT INTO user (user_type,name, username, password, email ) VALUES (?, ?, ?, ?, ?)";
+            "INSERT INTO users (user_type,name, username, password, email ) VALUES (?, ?, ?, ?, ?)";
           const valuesInsert = [user_type,name, username, hashedPassword,email ];
 
           connection.query(queryInsert, valuesInsert, (insertError, insertResults) => {

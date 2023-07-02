@@ -23,6 +23,7 @@
     "mysql2": "^3.3.2",
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "python-shell": "^5.0.0"
   }
 }
