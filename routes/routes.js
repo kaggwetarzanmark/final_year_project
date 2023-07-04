@@ -18,6 +18,8 @@ router.post('/register', registerController.registerUser);
 router.post('/stock', addController.addStock);
 router.post('/sales', isAuthenticated, addController.createSalesOrder);
 router.get('/forecasts', forecastController.forecast)
+router.get('/report', reportsController.graphdata);
+
 
 
 module.exports = router;
