@@ -45,8 +45,50 @@ function renderReportsPage(req, res) {
   } else {
     res.redirect('/');
   }
+
 }
 
 module.exports = {
   renderReportsPage,
 };
+
+
+  function graphdata(req, res) {
+    connection.query(`
+      SELECT product.product_name, WEEK(salesorder.date) AS week, SUM(salesorder.quantity) AS weekly_sales, 
+             MONTH(salesorder.date) AS month, SUM(salesorder.quantity) AS monthly_sales
+      FROM salesorder
+      JOIN product ON salesorder.product_id = product.product_id
+      GROUP BY product.product_name, WEEK(salesorder.date), MONTH(salesorder.date)
+    `, (error, results) => {
+      if (error) {
+        // Handle the error
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
+        return;
+      }
+  
+      try {
+        const salesOrders = results.map((order) => {
+          return {
+            productName: order.product_name,
+            weeklySales: order.weekly_sales,
+            monthlySales: order.monthly_sales,
+          };
+        });
+  
+        res.json(salesOrders);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
+      }
+    });
+  }
+  
+
+
+  
+  module.exports = {
+    renderReportsPage,graphdata
+  };
+
