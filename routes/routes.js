@@ -6,12 +6,11 @@ const reportsController = require('../controllers/reportsController');
 const addController = require('../controllers/addController');
 const ForecastingController = require('../controllers/ForecastingController');
 const { isAuthenticated } = require('./auth');
-<<<<<<< Updated upstream
+
 const forecastController = require('../controllers/forecastController')
 
-=======
+
 const dbConfig = require('./db_config');
->>>>>>> Stashed changes
 
 router.get(['/', '/login'], loginController.renderLoginPage);
 router.get('/register', registerController.renderRegisterPage);
@@ -19,13 +18,13 @@ router.get('/reports', isAuthenticated, reportsController.renderReportsPage);
 router.get('/add', isAuthenticated, addController.renderaddPage);
 router.get('/forecasting', isAuthenticated, ForecastingController.renderforecastingPage);
 router.post('/register', registerController.registerUser);
-<<<<<<< Updated upstream
+
 router.post('/stock', addController.addStock);
 router.post('/sales', isAuthenticated, addController.createSalesOrder);
 router.get('/forecasts', forecastController.forecast)
 
 
-=======
+
 router.get('/sales', (req, res) => {
     // Create a MySQL connection using the dbConfig.createConnection function
     const connection = dbConfig.createConnection();
@@ -52,5 +51,5 @@ router.get('/sales', (req, res) => {
     });
   });
   
->>>>>>> Stashed changes
+
 module.exports = router;
