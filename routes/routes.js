@@ -21,9 +21,8 @@ router.post('/register', registerController.registerUser);
 
 router.post('/stock', addController.addStock);
 router.post('/sales', isAuthenticated, addController.createSalesOrder);
-router.get('/forecasts', forecastController.forecast)
-router.get('/report', reportsController.graphdata);
-
+router.get('/forecasts/:product_name', forecastController.forecast)
+router.get('/report/:product_name', reportsController.graphdata);
 
 
 
