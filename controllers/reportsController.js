@@ -7,34 +7,88 @@ const connection = mysql.createConnection({
   password: '',
   database: 'supermarket',
 });
+
 function renderReportsPage(req, res) {
-  if (req.session.user && req.session.user.user_type === "Sales Manager") {
-    connection.query('SELECT salesdata_id, quantity, date, product.product_name FROM salesorder JOIN product ON salesorder.product_id = product.product_id', (error, results) => {
+  if (req.session.user && req.session.user.user_type === 'Sales Manager') {
+    const query = `
+    SELECT product.product_name, SUM(salesorder.quantity) AS total_quantity, product.available_quantity
+    FROM salesorder
+    JOIN product ON salesorder.product_id = product.product_id
+    GROUP BY product.product_name, product.available_quantity`;
+  
+    connection.query(query, (error, results) => {
+      if (error) {
+        console.error(error);
+        return res.status(500).send('Error retrieving sales data');
+      }
+
+      const salesOrders = results.map((order) => ({
+        Quantity: order.Quantity,
+        Total: order.Total,
+        product_name: order.product_name,
+        available_quantity: order.available_quantity,
+      }));
+
+      const recordsPerPage = 10;
+      const currentPage = req.query.page || 1;
+      const startIndex = (currentPage - 1) * recordsPerPage;
+      const endIndex = startIndex + recordsPerPage;
+      const paginatedOrders = salesOrders.slice(startIndex, endIndex);
+
+      res.render('reports', {
+        salesOrders: salesOrders,
+        paginatedOrders: paginatedOrders,
+        currentPage: currentPage,
+        recordsPerPage: recordsPerPage,
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+
+}
+
+module.exports = {
+  renderReportsPage,
+};
+
+
+  function graphdata(req, res) {
+    connection.query(`
+      SELECT product.product_name, WEEK(salesorder.date) AS week, SUM(salesorder.quantity) AS weekly_sales, 
+             MONTH(salesorder.date) AS month, SUM(salesorder.quantity) AS monthly_sales
+      FROM salesorder
+      JOIN product ON salesorder.product_id = product.product_id
+      GROUP BY product.product_name, WEEK(salesorder.date), MONTH(salesorder.date)
+    `, (error, results) => {
       if (error) {
         // Handle the error
         console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
         return;
       }
-      
-      const salesOrders = results.map((order) => {
-        return {
-          ...order,
-          date: new Date(order.date).toLocaleDateString('en-US', {
-            weekday: 'short',
-            month: 'short',
-            day: '2-digit',
-            year: 'numeric',
-          }),
-        };
-      });
   
-      res.render('reports', { salesOrders: salesOrders });
+      try {
+        const salesOrders = results.map((order) => {
+          return {
+            productName: order.product_name,
+            weeklySales: order.weekly_sales,
+            monthlySales: order.monthly_sales,
+          };
+        });
+  
+        res.json(salesOrders);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
+      }
     });
-  } else {
-    res.redirect("/");
   }
-  }
+  
+
+
   
   module.exports = {
-    renderReportsPage,
+    renderReportsPage,graphdata
   };
+
