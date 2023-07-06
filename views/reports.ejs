@@ -1,195 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link href="img/logo/logo.png" rel="icon" />
+    <title>SalesWave -SalesForecasting</title>
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="css/ruang-admin.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <link href="img/logo/logo.png" rel="icon" />
-  <title>SalesWave -SalesForecasting</title>
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="css/ruang-admin.min.css" rel="stylesheet" />
-</head>
-
-<body id="page-top">
-  <div id="wrapper">
-    <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-        <div class="sidebar-brand-icon">
-          <img src="img/logo/logo2.png" />
-        </div>
-        <div class="sidebar-brand-text mx-3">SalesWave</div>
-      </a>
-      <hr class="sidebar-divider my-0" />
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
-      </li>
-      <hr class="sidebar-divider" />
-      <div class="sidebar-heading">Features</div>
-
-      <li class="nav-item">
-        <a class="nav-link" href="reports">
-          <i class="fas fa-fw fa-palette"></i>
-          <span>Reports</span>
+  <body id="page-top">
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav sidebar sidebar-light accordion"
+        id="accordionSidebar"
+      >
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="#"
+        >
+          <div class="sidebar-brand-icon">
+            <img src="img/logo/logo2.png" />
+          </div>
+          <div class="sidebar-brand-text mx-3">SalesWave</div>
         </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="Forecasting">
-          <i class="fas fa-fw fa-palette"></i>
-          <span>Forecasting</span>
-        </a>
-      </li>
-      <div class="version" id="version-ruangadmin"></div>
-    </ul>
-    <!-- Sidebar -->
-    <div id="content-wrapper" class="d-flex flex-column">
-      <div id="content">
-        <!-- TopBar -->
-        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
-          <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
-          <ul class="navbar-nav ml-auto">
-            <div class="topbar-divider d-none d-sm-block"></div>
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px" />
-                <span class="ml-2 d-none d-lg-inline text-white small">Mark Tarzan</span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+        <hr class="sidebar-divider my-0" />
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a
+          >
+        </li>
+        <hr class="sidebar-divider" />
+        <div class="sidebar-heading">Features</div>
+
+        <li class="nav-item">
+          <a class="nav-link" href="reports">
+            <i class="fas fa-fw fa-palette"></i>
+            <span>Reports</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Forecasting">
+            <i class="fas fa-fw fa-palette"></i>
+            <span>Forecasting</span>
+          </a>
+        </li>
+        <div class="version" id="version-ruangadmin"></div>
+      </ul>
+      <!-- Sidebar -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <!-- TopBar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top"
+          >
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+            <ul class="navbar-nav ml-auto">
+              <div class="topbar-divider d-none d-sm-block"></div>
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <img
+                    class="img-profile rounded-circle"
+                    src="img/boy.png"
+                    style="max-width: 60px"
+                  />
+                  <span class="ml-2 d-none d-lg-inline text-white small"
+                    >Mark Tarzan</span
+                  >
                 </a>
-              </div>
-            </li>
-          </ul>
-        </nav>
-        <!-- Topbar -->
-
-
-        <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Reports</h1>
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item">Pages</li>
-              <li class="breadcrumb-item active" aria-current="page">
-                Blank Page
-              </li>
-            </ol>
-          </div>
-          <div class="table-responsive p-3">
-            <table class="table align-items-center table-flush" id="dataTable">
-              <thead class="thead-light">
-                <tr>
-
-                  <th>Product Name</th>
-                  <th>Quantity</th>
-                  <th>Revenue</th>
-                </tr>
-              </thead>
-              <% paginatedOrders.forEach(function(order) { %>
-
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="table-responsive p-3">
-      <table class="table align-items-center table-flush" id="dataTable">
-        <thead class="thead-light">
-
-          <tr>
-            <td>
-              <%= order.product_name %>
-            </td>
-            <td>
-              <%= order.Quantity %>
-            </td>
-            <td>
-              <%= order.Total %>
-            </td>
-          </tr>
-          <% }); %>
-            </tbody>
-
-      </table>
-      <nav>
-        <ul class="pagination justify-content-center">
-          <% if (currentPage> 1) { %>
-            <li class="page-item">
-              <a class="page-link" href="?page=<%= parseInt(currentPage) - 1 %>">Previous</a>
-            </li>
-            <% } %>
-              <% for (let i=1; i <=Math.ceil(salesOrders.length / recordsPerPage); i++) { %>
-                <li class="page-item <%= (currentPage == i) ? 'active' : '' %>">
-                  <a class="page-link" href="?page=<%= i %>">
-                    <%= i %>
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <div class="dropdown-divider"></div>
+                  <a
+                    class="dropdown-item"
+                    href="javascript:void(0);"
+                    data-toggle="modal"
+                    data-target="#logoutModal"
+                  >
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Logout
                   </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- Topbar -->
+
+          <!-- Container Fluid-->
+          <div class="container-fluid" id="container-wrapper">
+            <div
+              class="d-sm-flex align-items-center justify-content-between mb-4"
+            >
+              <h1 class="h3 mb-0 text-gray-800">Reports</h1>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Home</a></li>
+                <li class="breadcrumb-item">Pages</li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  reports Page
                 </li>
-                <% } %>
-                  <% if (currentPage < Math.ceil(salesOrders.length / recordsPerPage)) { %>
+              </ol>
+            </div>
+            <div class="col-lg-12">
+              <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Products reports</h6>
+                  <select class="select2-single form-control form-control-sm w-25" name="state" id="select2Single">
+                    <option value="" selected disabled>Select Product</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Banana">Banana</option>
+                    <option value="Milk">Milk</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Bread">Bread</option>
+                  </select>
+                  <button type="button" class="btn btn-outline-secondary mb-1 btn-sm" onclick="fetchAndPlotData()">Get Graph</button>
+                </div>
+                <div class="card-body">
+                  <div class="chart-bar">
+                    <canvas id="myBarChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive p-3">
+              <table
+                class="table align-items-center table-flush"
+                id="dataTable"
+              >
+                <thead class="thead-light">
+                  <tr>
+
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Revenue</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Revenue</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <% paginatedOrders.forEach(function(order) { %>
+                    <tr>
+                      <td>
+                        <%= order.product_name %>
+                      </td>
+                      <td>
+                        <%= order.Quantity %>
+                      </td>
+                      <td>
+                        <%= order.Total %>
+                      </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+              </table>
+              <nav>
+                <ul class="pagination justify-content-center">
+                  <% if (currentPage> 1) { %>
                     <li class="page-item">
-                      <a class="page-link" href="?page=<%= parseInt(currentPage) + 1 %>">Next</a>
+                      <a class="page-link" href="?page=<%= parseInt(currentPage) - 1 %>">Previous</a>
                     </li>
                     <% } %>
-        </ul>
-      </nav>
-    </div>
+                      <% for (let i=1; i <=Math.ceil(salesOrders.length / recordsPerPage); i++) { %>
+                        <li class="page-item <%= (currentPage == i) ? 'active' : '' %>">
+                          <a class="page-link" href="?page=<%= i %>">
+                            <%= i %>
+                          </a>
+                        </li>
+                        <% } %>
+                          <% if (currentPage < Math.ceil(salesOrders.length / recordsPerPage)) { %>
+                            <li class="page-item">
+                              <a class="page-link" href="?page=<%= parseInt(currentPage) + 1 %>">Next</a>
+                            </li>
+                            <% } %>
+                </ul>
+              </nav>
+            </div>
 
-    <!-- Modal Logout -->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabelLogout">
-              Ohh No!
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <!-- Modal Logout -->
+            <div
+              class="modal fade"
+              id="logoutModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabelLogout"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelLogout">
+                      Ohh No!
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure you want to logout?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary"
+                      data-dismiss="modal"
+                    >
+                      Cancel
+                    </button>
+                    <a id="logout-button" class="btn btn-primary">Logout</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="modal-body">
-            <p>Are you sure you want to logout?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">
-              Cancel
-            </button>
-            <a id="logout-button" class="btn btn-primary">Logout</a>
-          </div>
+          <!---Container Fluid-->
         </div>
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span
+                >copyright &copy;
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                - developed by
+                <b><a href="#" target="_blank">SalesWave</a></b>
+              </span>
+            </div>
+          </div>
+        </footer>
+        <!-- Footer -->
       </div>
-    </div>
-  </div>
-  <!---Container Fluid-->
-  </div>
-  <!-- Footer -->
-  <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-      <div class="copyright text-center my-auto">
-        <span>copyright &copy;
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          - developed by
-          <b><a href="#" target="_blank">SalesWave</a></b>
-        </span>
-      </div>
-    </div /'...........; </footer>
-    <!-- Footer -->
-    </div>
     </div>
 
     <!-- Scroll to top -->
@@ -201,6 +288,60 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="js/ruang-admin.min.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      function fetchAndPlotData() {
+        var selectedProduct = document.getElementById("select2Single").value;
+        if (selectedProduct) {
+          axios
+            .get(`http://localhost:5000/report/${encodeURIComponent(selectedProduct)}`)
+            .then(response => {
+              const data = response.data;
 
+              // Check if data is an array
+              if (Array.isArray(data)) {
+                plotBarGraph(data);
+              } else {
+                alert("Invalid data received from the server.");
+              }
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        } else {
+          alert("Please select a product.");
+        }
+      }
+
+      function plotBarGraph(data) {
+        const labels = data.map(item => item.month);
+        const quantities = data.map(item => item.totalQuantity);
+
+        const ctx = document.getElementById('myBarChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Total Quantity',
+              data: quantities,
+              backgroundColor: 'rgba(54, 162, 235, 0.5)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
